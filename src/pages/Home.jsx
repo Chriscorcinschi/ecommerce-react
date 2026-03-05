@@ -6,7 +6,7 @@ import {
    Text,
    VStack,
 } from "@chakra-ui/react";
-import { CardProduct } from "../components/ui/Card";
+import { ProductCard } from "../components/ui/ProductCard";
 import { getProducts } from "../data/products";
 
 export default function Home() {
@@ -37,7 +37,7 @@ export default function Home() {
                gap={4}
             >
                {products.map((product) => (
-                  <CardProduct product={product} key={product.id} />
+                  <ProductCard product={product} key={product.id} />
                ))}
             </SimpleGrid>
          </Box>

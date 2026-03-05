@@ -1,7 +1,7 @@
 import { Button, Card, Image, SimpleGrid, Text, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
-export const CardProduct = ({ product }) => {
+export const ProductCard = ({ product }) => {
    const currency = "€";
    return (
       <Card.Root maxW="sm" overflow="hidden">
