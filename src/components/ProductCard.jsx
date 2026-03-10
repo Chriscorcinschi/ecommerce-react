@@ -20,20 +20,16 @@ export const ProductCard = ({ product }) => {
                fontWeight="semibold"
                letterSpacing="tight"
                mt="2"
-               color="blue"
+               color="teal.500"
             >
                {currency} {product.price}
             </Text>
          </Card.Body>
 
          <Card.Footer gap="2">
-            <Button
-               as={RouterLink}
-               to={`/product/${product.id}`}
-               variant="subtle"
-            >
-               View Details
-            </Button>
+            <RouterLink to={`/product/${product.id}`}>
+               <Button variant="subtle">View Details</Button>
+            </RouterLink>
 
             <Button variant="solid">Add to cart</Button>
          </Card.Footer>

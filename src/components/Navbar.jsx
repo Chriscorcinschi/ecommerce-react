@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { ColorModeButton } from "./ui/color-mode";
-
 import { useAuth } from "../context/AuthContext";
 import { Logo } from "./ui/Logo";
 import { Cart } from "./ui/Cart";
@@ -41,14 +40,11 @@ export default function Navbar() {
                <Spacer />
 
                <HStack spacing={6} ml={10}>
-                  <Button
-                     as={RouterLink}
-                     to="/"
-                     variant="ghost"
-                     fontSize="medium"
-                  >
-                     Home
-                  </Button>
+                  <RouterLink to="/">
+                     <Button variant="ghost" fontSize="medium">
+                        Home
+                     </Button>
+                  </RouterLink>
                   <Cart />
                </HStack>
 
@@ -66,6 +62,7 @@ export default function Navbar() {
                         <Text display={{ base: "none", md: "block" }}>
                            {user.email}
                         </Text>
+
                         <Button
                            onClick={handleLogout}
                            colorScheme="red"
@@ -76,20 +73,12 @@ export default function Navbar() {
                      </HStack>
                   ) : (
                      <>
-                        <Button
-                           as={RouterLink}
-                           to="/auth?mode=login"
-                           variant="outline"
-                        >
-                           Login
-                        </Button>
-                        <Button
-                           as={RouterLink}
-                           to="/auth?mode=signup"
-                           colorScheme="blue"
-                        >
-                           Sign Up
-                        </Button>
+                        <RouterLink to="/auth?mode=login">
+                           <Button variant="outline">Login</Button>
+                        </RouterLink>
+                        <RouterLink to="/auth?mode=signup">
+                           <Button colorScheme="blue">Sign Up</Button>
+                        </RouterLink>
                      </>
                   )}
                   <ColorModeButton />
