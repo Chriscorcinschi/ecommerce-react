@@ -1,8 +1,11 @@
 import { Button, Card, Image, Text } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 export const ProductCard = ({ product }) => {
    const currency = "€";
+   const { addToCart } = useCart();
+
    return (
       <Card.Root maxW="sm" overflow="hidden">
          <Image
@@ -31,7 +34,9 @@ export const ProductCard = ({ product }) => {
                <Button variant="subtle">View Details</Button>
             </RouterLink>
 
-            <Button variant="solid">Add to cart</Button>
+            <Button variant="solid" onClick={() => addToCart(product.id)}>
+               Add to cart
+            </Button>
          </Card.Footer>
       </Card.Root>
    );

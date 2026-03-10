@@ -13,9 +13,12 @@ import {
    Button,
    Spinner,
 } from "@chakra-ui/react";
+import { useCart } from "../context/CartContext";
 
 export default function ProductDetails() {
    const currency = "€";
+   const { addToCart } = useCart();
+
    const { id } = useParams();
    const navigate = useNavigate();
 
@@ -70,7 +73,11 @@ export default function ProductDetails() {
                   <Text color="gray.600">{product.description}</Text>
 
                   <Stack direction="row" spacing={4}>
-                     <Button colorScheme="teal" size="lg">
+                     <Button
+                        colorScheme="teal"
+                        size="lg"
+                        onClick={() => addToCart(product.id)}
+                     >
                         Add to Cart
                      </Button>
 
