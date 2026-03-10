@@ -1,10 +1,28 @@
-import { Box, Flex, HStack, Button, Spacer, Container } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+import {
+   Box,
+   Flex,
+   HStack,
+   Button,
+   Spacer,
+   Container,
+   Text,
+} from "@chakra-ui/react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { ColorModeButton } from "./ui/color-mode";
+
+import { useAuth } from "../context/AuthContext";
 import { Logo } from "./ui/Logo";
 import { Cart } from "./ui/Cart";
 
-export default function Navbar({ isAuthenticated, onLogout }) {
+export default function Navbar() {
+   const { user, logout } = useAuth();
+   const navigate = useNavigate();
+
+   function handleLogout() {
+      logout();
+      navigate("/");
+   }
+
    return (
       <Box
          as="nav"
@@ -21,6 +39,7 @@ export default function Navbar({ isAuthenticated, onLogout }) {
                <Logo />
 
                <Spacer />
+
                <HStack spacing={6} ml={10}>
                   <Button
                      as={RouterLink}
@@ -30,31 +49,48 @@ export default function Navbar({ isAuthenticated, onLogout }) {
                   >
                      Home
                   </Button>
-
                   <Cart />
                </HStack>
 
                <Spacer />
 
                <HStack spacing={4}>
-                  {!isAuthenticated ? (
+                  {user ? (
+                     <HStack>
+                        <Box
+                           w="32px"
+                           h="32px"
+                           borderRadius="full"
+                           bg="blue.500"
+                        />
+                        <Text display={{ base: "none", md: "block" }}>
+                           {user.email}
+                        </Text>
+                        <Button
+                           onClick={handleLogout}
+                           colorScheme="red"
+                           variant="outline"
+                        >
+                           Logout
+                        </Button>
+                     </HStack>
+                  ) : (
                      <>
-                        <Button as={RouterLink} to="/login" variant="outline">
+                        <Button
+                           as={RouterLink}
+                           to="/auth?mode=login"
+                           variant="outline"
+                        >
                            Login
                         </Button>
-
-                        <Button as={RouterLink} to="/signup" colorScheme="blue">
+                        <Button
+                           as={RouterLink}
+                           to="/auth?mode=signup"
+                           colorScheme="blue"
+                        >
                            Sign Up
                         </Button>
                      </>
-                  ) : (
-                     <Button
-                        onClick={onLogout}
-                        colorScheme="red"
-                        variant="outline"
-                     >
-                        Logout
-                     </Button>
                   )}
                   <ColorModeButton />
                </HStack>
