@@ -1,14 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { useState, createContext, useContext } from "react";
 
 const AuthContext = createContext(null);
-
-export function useAuth() {
-   const context = useContext(AuthContext);
-   if (!context) {
-      throw new Error("useAuth must be used within an AuthProvider");
-   }
-   return context;
-}
 
 export default function AuthProvider({ children }) {
    const [user, setUser] = useState(() => {
@@ -57,4 +49,12 @@ export default function AuthProvider({ children }) {
          {children}
       </AuthContext.Provider>
    );
+}
+
+export function useAuth() {
+   const context = useContext(AuthContext);
+   if (!context) {
+      throw new Error("useAuth must be used within an AuthProvider");
+   }
+   return context;
 }
